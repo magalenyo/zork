@@ -15,10 +15,36 @@
 
 using namespace std;
 
-struct CommandExtended {
+/*struct CommandExtended {
 	string default;
 	string shortcut;
+
+	// pre: --
+	// post: returns true if input is equals to default or shortcut
+	bool equals(string input);
+};*/
+
+class Command {
+public:
+	string default;
+
+public:
+	Command();
+	Command(string value);
+	virtual bool equals(string input) const;
 };
+
+class CommandExtended : public Command {
+public:
+	string shortcut;
+
+public:
+	CommandExtended();
+	CommandExtended(string value1, string value2);
+	bool equals(string input) const override;
+};
+
+
 
 class Commands
 {
@@ -34,50 +60,50 @@ public:
 	static const CommandExtended UP;
 	static const CommandExtended DOWN;
 	static const CommandExtended LOOK;
-	static const string SAVE;
-	static const string RESTORE;
-	static const string RESTART;
-	static const string VERBOSE;
-	static const string SCORE;
-	static const string DIAGNOSTIC;
-	static const string BRIEF;
-	static const string SUPERBRIEF;
+	static const Command SAVE;
+	static const Command RESTORE;
+	static const Command RESTART;
+	static const Command VERBOSE;
+	static const Command SCORE;
+	static const Command DIAGNOSTIC;
+	static const Command BRIEF;
+	static const Command SUPERBRIEF;
 	static const CommandExtended QUIT;
-	static const string CLIMB;
-	static const string G;
-	static const string GO;
-	static const string ENTER;
-	static const string OUT;
+	static const Command CLIMB;
+	static const Command G;
+	static const Command GO;
+	static const Command ENTER;
+	static const Command OUT;
 	static const CommandExtended HELLO;
-	static const string JUMP;
-	static const string SWEAR;
-	static const string EMPTY;
+	static const Command JUMP;
+	static const Command SWEAR;
+	static const Command EMPTY;
 	static const CommandExtended TAKE;
 	static const CommandExtended TAKE_EVERYTHING;
-	static const string THROW;
-	static const string OPEN;
-	static const string READ;
-	static const string DROP;
-	static const string PUT;
-	static const string TURN;
-	static const string MOVE;
-	static const string ATTACK;
-	static const string EXAMINE;
+	static const Command THROW;
+	static const Command OPEN;
+	static const Command READ;
+	static const Command DROP;
+	static const Command PUT;
+	static const Command TURN;
+	static const Command MOVE;
+	static const Command ATTACK;
+	static const Command EXAMINE;
 	static const CommandExtended INVENTORY;
-	static const string EAT;
-	static const string SHOUT;
-	static const string CLOSE;
-	static const string TIE;
-	static const string PICK;
-	static const string KILL_SELF;
-	static const string BREAK;
-	static const string KILL;
-	static const string PRAY;
-	static const string DRINK;
-	static const string SMELL;
-	static const string CUT;
-	static const string BAR;
-	static const string LISTEN;
+	static const Command EAT;
+	static const Command SHOUT;
+	static const Command CLOSE;
+	static const Command TIE;
+	static const Command PICK;
+	static const Command KILL_SELF;
+	static const Command BREAK;
+	static const Command KILL;
+	static const Command PRAY;
+	static const Command DRINK;
+	static const Command SMELL;
+	static const Command CUT;
+	static const Command BAR;
+	static const Command LISTEN;
 };
 
 #endif //Commands_H

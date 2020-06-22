@@ -2,60 +2,93 @@
 
 using namespace std;
 
-const struct CommandExtended Commands::NORTH = { "north", "n" };
-const struct CommandExtended Commands::SOUTH = { "south", "s" };
-const struct CommandExtended Commands::EAST = { "east", "e" };
-const struct CommandExtended Commands::WEST = { "west", "w" };
-const struct CommandExtended Commands::NORTHEAST = { "northeast", "ne" };
-const struct CommandExtended Commands::NORTHWEST = { "northwest", "nw" };
-const struct CommandExtended Commands::SOUTHEAST = { "southeast", "se" };
-const struct CommandExtended Commands::SOUTHWEST = { "southwest", "sw" };
-const struct CommandExtended Commands::UP = { "up", "u" };
-const struct CommandExtended Commands::DOWN = { "down","d" };
-const struct CommandExtended Commands::LOOK = { "look","l" };
-const string Commands::SAVE = "save";
-const string Commands::RESTORE = "restore";
-const string Commands::RESTART = "restart";
-const string Commands::VERBOSE = "verbose";
-const string Commands::SCORE = "score";
-const string Commands::DIAGNOSTIC = "diagnostic";
-const string Commands::BRIEF = "brief";
-const string Commands::SUPERBRIEF = "superbrief";
-const struct CommandExtended Commands::QUIT = { "quit","q" };
-const string Commands::CLIMB = "climb";
-const string Commands::G = "g";
-const string Commands::GO = "go";
-const string Commands::ENTER = "enter";
-const string Commands::OUT = "out";
-const struct CommandExtended Commands::HELLO = { "hi","hello" };
-const string Commands::JUMP = "jump";
-const string Commands::SWEAR = "damn";
-const string Commands::EMPTY = "";
-const struct CommandExtended Commands::TAKE = { "take","get" };
-const struct CommandExtended Commands::TAKE_EVERYTHING = { "take all", "get" };			// doubt
-const string Commands::THROW = "throw";
-const string Commands::OPEN = "open";
-const string Commands::READ = "read";
-const string Commands::DROP = "drop";
-const string Commands::PUT = "put";
-const string Commands::TURN = "turn";
-const string Commands::MOVE = "move";
-const string Commands::ATTACK = "attack";
-const string Commands::EXAMINE = "examine";
-const struct CommandExtended Commands::INVENTORY = { "inventory","i" };
-const string Commands::EAT = "eat";
-const string Commands::SHOUT = "shout";
-const string Commands::CLOSE = "close";
-const string Commands::TIE = "tie";
-const string Commands::PICK = "pick";
-const string Commands::KILL_SELF = "kill self";			//doubt
-const string Commands::BREAK = "break";
-const string Commands::KILL = "kill";
-const string Commands::PRAY = "pray";
-const string Commands::DRINK = "drink";
-const string Commands::SMELL = "smell";
-const string Commands::CUT = "cut";
-const string Commands::BAR = "bar";
-const string Commands::LISTEN = "listen";
+const CommandExtended Commands::NORTH = { "north", "n" };
+const CommandExtended Commands::SOUTH = { "south", "s" };
+const CommandExtended Commands::EAST = { "east", "e" };
+const CommandExtended Commands::WEST = { "west", "w" };
+const CommandExtended Commands::NORTHEAST = { "northeast", "ne" };
+const CommandExtended Commands::NORTHWEST = { "northwest", "nw" };
+const CommandExtended Commands::SOUTHEAST = { "southeast", "se" };
+const CommandExtended Commands::SOUTHWEST = { "southwest", "sw" };
+const CommandExtended Commands::UP = { "up", "u" };
+const CommandExtended Commands::DOWN = { "down","d" };
+const CommandExtended Commands::LOOK = { "look","l" };
+const Command Commands::SAVE = "save";
+const Command Commands::RESTORE = "restore";
+const Command Commands::RESTART = "restart";
+const Command Commands::VERBOSE = "verbose";
+const Command Commands::SCORE = "score";
+const Command Commands::DIAGNOSTIC = "diagnostic";
+const Command Commands::BRIEF = "brief";
+const Command Commands::SUPERBRIEF = "superbrief";
+const CommandExtended Commands::QUIT = { "quit","q" };
+const Command Commands::CLIMB = "climb";
+const Command Commands::G = "g";
+const Command Commands::GO = "go";
+const Command Commands::ENTER = "enter";
+const Command Commands::OUT = "out";
+const CommandExtended Commands::HELLO = { "hi","hello" };
+const Command Commands::JUMP = "jump";
+const Command Commands::SWEAR = "damn";
+const Command Commands::EMPTY = "";
+const CommandExtended Commands::TAKE = { "take","get" };
+const CommandExtended Commands::TAKE_EVERYTHING = { "take all", "get" };			// doubt
+const Command Commands::THROW = "throw";
+const Command Commands::OPEN = "open";
+const Command Commands::READ = "read";
+const Command Commands::DROP = "drop";
+const Command Commands::PUT = "put";
+const Command Commands::TURN = "turn";
+const Command Commands::MOVE = "move";
+const Command Commands::ATTACK = "attack";
+const Command Commands::EXAMINE = "examine";
+const CommandExtended Commands::INVENTORY = { "inventory","i" };
+const Command Commands::EAT = "eat";
+const Command Commands::SHOUT = "shout";
+const Command Commands::CLOSE = "close";
+const Command Commands::TIE = "tie";
+const Command Commands::PICK = "pick";
+const Command Commands::KILL_SELF = "kill self";			//doubt
+const Command Commands::BREAK = "break";
+const Command Commands::KILL = "kill";
+const Command Commands::PRAY = "pray";
+const Command Commands::DRINK = "drink";
+const Command Commands::SMELL = "smell";
+const Command Commands::CUT = "cut";
+const Command Commands::BAR = "bar";
+const Command Commands::LISTEN = "listen";
 
 // Wand actions are not used
+
+CommandExtended::CommandExtended()
+{
+	default = "";
+	shortcut = "";
+}
+
+CommandExtended::CommandExtended(string value1, string value2)
+{
+	default = value1;
+	shortcut = value2;
+}
+
+
+bool CommandExtended::equals(string input) const
+{
+	return input == default || input == shortcut;
+}
+
+Command::Command()
+{
+	default = "";
+}
+
+Command::Command(string value)
+{
+	default = value;
+}
+
+bool Command::equals(string input) const
+{
+	return default == input;
+}
