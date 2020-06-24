@@ -13,7 +13,7 @@ using namespace std;
 class Room : public Entity
 {
 public:
-	map<string, string> attributes;
+	//map<string, string> attributes;
 
 public:
 	Room();
@@ -22,9 +22,7 @@ public:
 	void addItem(Item *item);
 	bool existsInRoom(Entity *entity);
 	Exit* getTargetExit(const string &direction) const;
-	void addAttribute(string key, string value);
-	string findAttributeValue(string key);
-	bool hasAttribute(string key);
+
 };
 
 #endif

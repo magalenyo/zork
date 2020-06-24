@@ -13,7 +13,7 @@ World::World()
 	Room* wolves = new Room("Wolves!", "You're in front of two fierce wolves, what are you going to do?");
 	      wolves->addAttribute("wolves", "true");
 	Room* bridge = new Room("The damaged bridge", "You can take your chances and cross the bridge, but it doesn't look safe.");
-	Room* end = new Room("Sacred temple", "You finally reached the temple! You are pleasently welcome by the monks.");
+	Room* end = new Room("Sacred temple", "You're almost there...");
 	      end->addAttribute("end", "true");
 
 	entities.push_back(crossroad);
@@ -126,6 +126,9 @@ ResultEnum World::parseCommand(vector<string> input)
 			else if (Commands::INVENTORY.equals(input[0])) {
 				player->inventory();
 			}
+			else if (Commands::FIGHT.equals(input[0])) {
+				player->fight();
+			}
 			else {
 				cout << "I could not understand the last command." << endl;
 			}
@@ -182,11 +185,17 @@ bool World::isEndCommand(const vector<string> &input)
 
 void World::finishGame()
 {
-	cout << "CONGRATULATIONS! You made it to the temple!" << endl;
-	if (player->hasIdol()) {
-		cout << "Thanks for bringing the idol safely! May you have the best of lucks in life!" << endl;
+	if (player->isWounded()) {
+		cout << "You have grievous wounds and way too exhausted to continue... You die before getting to the temple." << endl;
 	}
 	else {
-		cout << "Though, don't be happy, you haven't delivered the idol and failed to do the only task you had to. You're gonna suffer a worse fate than death." << endl;
+		cout << "CONGRATULATIONS! You made it to the temple!" << endl;
+		if (player->hasIdol()) {
+			cout << "Thanks for bringing the idol safely! May you have the best of lucks in life!" << endl;
+		}
+		else {
+			cout << "But... don't be so happy, you haven't delivered the idol and failed to do the only task you had to. You're gonna suffer a worse fate than death." << endl;
+		}
 	}
+	
 }

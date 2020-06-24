@@ -2,6 +2,7 @@
 
 Entity::Entity()
 {
+	entityType = ENTITY;
 }
 
 Entity::~Entity()
@@ -10,9 +11,7 @@ Entity::~Entity()
 
 Entity::Entity(string name, string description, Entity* parent) : name(name), description(description), parent(parent)
 {
-	/*this->name = name;
-	this->description = description;
-	this->parent = parent;*/
+	entityType = ENTITY;
 
 	if (parent != NULL)
 		parent->elements.push_back(this);
@@ -44,4 +43,27 @@ void Entity::look()
 	cout << name << endl;
 	cout << description << endl;
 }
+
+void Entity::addAttribute(string key, string value)
+{
+	attributes[key] = value;
+}
+
+string Entity::findAttributeValue(string key)
+{
+	auto it = attributes.find(key);
+	if (it != attributes.end()) {
+		return it->second;
+	}
+	else {
+		return "error";
+	}
+}
+
+bool Entity::hasAttribute(string key)
+{
+	auto it = attributes.find(key);
+	return it != attributes.end();
+}
+
 

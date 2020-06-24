@@ -15,6 +15,7 @@
 #include <iostream>
 #include <string>
 #include <StringUtils.h>
+#include <map>
 
 using namespace std;
 
@@ -37,6 +38,7 @@ public:
 
 	list<Entity*> elements;
 	Entity *parent;
+	map<string, string> attributes;
 
 //FUNCTIONS
 public:
@@ -48,6 +50,10 @@ public:
 	void changeParentTo(Entity* newParent);
 
 	virtual void look();
+
+	void addAttribute(string key, string value);
+	string findAttributeValue(string key);
+	bool hasAttribute(string key);
 protected:
 private:
 

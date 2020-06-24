@@ -275,7 +275,38 @@ void Player::throwObject(const vector<string>& input)
 		targetExit->blocked = false;
 	}
 	else {
-		cout << "There's no one here, I shouldn't throw the rock" << endl;
+		cout << "There's no one here, I shouldn't throw the rock." << endl;
+	}
+}
+
+void Player::fight()
+{
+	Item* item = (Item*)find("sword", ITEM);
+	Item* backpack = NULL;
+	if (item == NULL) {
+		backpack = getBackpack();
+		if (backpack != NULL) {
+			item = (Item*)backpack->find("sword", ITEM);			// checks if the item exists in the player backpack
+		}
+	}
+	if (item == NULL) {
+		cout << "How are you gonna fight? You don't have a weapon!" << endl;
+		//cout << "sword could not be found in the inventory" << (getBackpack() != NULL ? " / backpack." : ".") << endl;
+		return;
+	}
+
+	if (getRoom()->hasAttribute("wolves")) {
+		cout << "You fight the wolves and you kill them, but you are wounded and exhausted." << endl;
+		cout << "You should eat something" << endl;
+		item->changeParentTo(NULL);
+		getRoom()->name = "No more wolves.";
+		getRoom()->description = "The path is now clear. You can now go north to the temple.";
+		Exit* targetExit = getRoom()->getTargetExit("north");
+		targetExit->blocked = false;
+		addAttribute("wounded", "true");
+	}
+	else {
+		cout << "Who are you gonna fight? There's no one here." << endl;
 	}
 }
 
@@ -283,6 +314,12 @@ bool Player::isInLastRoom() const
 {
 	return getRoom()->hasAttribute("end");
 }
+
+bool Player::isWounded()
+{
+	return hasAttribute("wounded");
+}
+
 
 bool Player::hasIdol()
 {
@@ -298,3 +335,4 @@ bool Player::hasIdol()
 
 	return item != NULL;
 }
+

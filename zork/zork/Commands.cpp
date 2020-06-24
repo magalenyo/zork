@@ -58,6 +58,7 @@ const Command Commands::CUT = "cut";
 const Command Commands::BAR = "bar";
 const Command Commands::LISTEN = "listen";
 const Command Commands::UNLOCK = "unlock";
+const Command Commands::FIGHT = "fight";
 
 
 // Wand actions are not used

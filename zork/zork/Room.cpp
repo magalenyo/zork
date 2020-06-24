@@ -39,24 +39,3 @@ Exit * Room::getTargetExit(const string & direction) const
 	return NULL;
 }
 
-void Room::addAttribute(string key, string value)
-{
-	attributes[key] = value;
-}
-
-string Room::findAttributeValue(string key)
-{
-	auto it = attributes.find(key);
-	if (it != attributes.end()) {
-		return it->second;
-	}
-	else {
-		return "error";
-	}
-}
-
-bool Room::hasAttribute(string key)
-{
-	auto it = attributes.find(key);
-	return it != attributes.end();
-}

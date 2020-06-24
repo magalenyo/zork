@@ -105,6 +105,7 @@ public:
 	static const Command BAR;
 	static const Command LISTEN;
 	static const Command UNLOCK;
+	static const Command FIGHT;
 };
 
 #endif //Commands_H

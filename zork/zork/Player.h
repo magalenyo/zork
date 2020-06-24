@@ -37,9 +37,12 @@ public:
 	void drop(const vector<string> &input);
 	void put(const vector<string> &input);
 	void throwObject(const vector<string> &input);
+	void fight();
 
 	bool isInLastRoom() const;
+	bool isWounded();
 	bool hasIdol();
+	
 protected:
 private:
 };
