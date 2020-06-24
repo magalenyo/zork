@@ -70,18 +70,11 @@ World::World()
 	entities.push_back(backpack);
 	entities.push_back(coins);
 
-	/*house->addItem(sword);
-	treehouse->addItem(key);
-	treehouse->addItem(backpack);
-	road->addItem(rock);
-	road->addItem(berries);
-	bridge->addItem(coins);*/
-
 	// Characters
 	Character* wolf1 = new Character("A big wolf", "This wolf has razor sharp teeth.", wolves);
 	Character* wolf2 = new Character("A smaller wolf", "Not so threatening, but still dangerous.", wolves);
 	
-	player->addItem(goldenIdol);
+	//player->addItem(goldenIdol);
 	/*goldenIdol->elements.push_back(key);
 	key->elements.push_back(sword);
 	player->addItem(rock);*/
@@ -130,6 +123,9 @@ ResultEnum World::parseCommand(vector<string> input)
 			else if (Commands::INVENTORY.equals(input[0])) {
 				player->inventory();
 			}
+			else {
+				cout << "I could not understand the last command." << endl;
+			}
 			break;
 		case 2:
 			if (Commands::GO.equals(input[0])) {
@@ -141,6 +137,9 @@ ResultEnum World::parseCommand(vector<string> input)
 			else if (Commands::DROP.equals(input[0])) {
 				player->drop(input);
 			}
+			else {
+				cout << "I could not understand the last command." << endl;
+			}
 			break;
 		case 3:
 			break;
@@ -151,8 +150,17 @@ ResultEnum World::parseCommand(vector<string> input)
 			else if (Commands::UNLOCK.equals(input[0])) {
 				player->unlock(input);
 			}
+			else if (Commands::PUT.equals(input[0])) {
+				player->put(input);
+			}
+			else {
+				cout << "I could not understand the last command." << endl;
+			}
 			break;
 		default:
+			
+			cout << "I could not understand the last command." << endl;
+			
 			break;
 	}
 	return OK;

@@ -74,10 +74,8 @@ void Player::take(const vector<string> &input)
 		}
 		else {
 			if (enoughInventorySpace()) {						// there's enough room in the inventory
-				targetItem->changeParentTo(this);
-				cout << item->name << " taken." << endl;
 				cout << targetItem->name << " taken from " << input[3] << endl;
-
+				targetItem->changeParentTo(this);
 			}
 			else {
 				cout << "Your inventory is full." << (getBackpack() != NULL ? "Try putting your inventory items in your backpack first" : "") << endl;
@@ -151,6 +149,14 @@ void Player::unlock(const vector<string>& input)
 
 	Item* item = (Item*) find(input[3], ITEM);
 
+	Item* backpack = NULL;
+	if (item == NULL) {
+		backpack = getBackpack();						// get backpack
+		if (backpack != NULL) {
+			item = (Item*)backpack->find(input[3], ITEM);	// checks if the item exists in the player backpack
+		}
+	}
+
 	if (item == NULL) {
 		cout << "Could not find " << input[3] << " in your inventory." << endl;
 		return;
@@ -158,8 +164,6 @@ void Player::unlock(const vector<string>& input)
 
 	targetExit->unlock();
 	cout << "You have unlocked " << targetExit->getNameFrom((Room*)parent) << " with " << input[3] << endl;
-
-	
 }
 
 void Player::drop(const vector<string>& input)
@@ -185,4 +189,55 @@ void Player::drop(const vector<string>& input)
 		cout << "You just dropped " << input[1] << " on " << currentRoom->name << endl;
 		item->changeParentTo(parent);
 	}
+}
+
+void Player::put(const vector<string>& input)
+{
+	if (input[1] == input[3]) {										// put backpack into backpack?
+		cout << "Please, don't do that." << endl;
+		return;
+	}
+
+	Item* item = (Item*)find(input[1], ITEM);						// find first item
+
+	Item* backpack = NULL;
+	if (item == NULL) {
+		backpack = getBackpack();
+		if (backpack != NULL) {
+			item = (Item*)backpack->find(input[1], ITEM);			// checks if the item exists in the player backpack
+		}
+	}
+
+	if (item == NULL) {												// if not found in backpack
+		item = (Item*)parent->find(input[1], ITEM);					// find in room
+	}
+
+	if (item == NULL) {												// if not found in backpack or inventory
+		cout << input[1] << " could not be found in the room / inventory" << (getBackpack() != NULL ? " / backpack." : ".") << endl;
+		return;
+	}
+
+	//--- If this point reached, the first item has been found
+
+	Item* placeToPut = (Item*)find(input[3], ITEM);					// find in inventory
+
+	if (placeToPut == NULL) {										// if not found in inventory,. find in backpack
+		/*backpack = getBackpack();*/
+		if (backpack != NULL) {
+			placeToPut = (Item*)backpack->find(input[1], ITEM);		// checks if the item exists in the player backpack
+		}
+	}
+
+	if (placeToPut == NULL) {										// if not found in backpack
+		placeToPut = (Item*) parent->find(input[3], ITEM);			// find in room
+	}
+
+	if (placeToPut == NULL) {										// if not found in room, backpack or inventory
+		cout << input[3] << " could not be found in the room / inventory" << (getBackpack() != NULL ? " / backpack." : ".") << endl;
+		return;
+	}
+
+	cout << "You just put " << input[1] << " into " << input[3] << "." << endl;
+	item->changeParentTo(placeToPut);
+
 }
