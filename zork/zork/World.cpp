@@ -9,11 +9,12 @@ World::World()
 	Room* treehouse = new Room("Treehouse", "You've climbed up to the treehouse. In the distance, you can see the temple.");
 	Room* entrance = new Room("House entrance", "You're at the entrance and you knock, but there's no answer. The door is locked and facing west.");
 	Room* house = new Room("House", "You are in the house.");
-	Room* eastPath = new Room("East path", "Two wolves are blocking the path. You see an alternative path heading east: a damaged bridge over a furious river.");
+	Room* eastPath = new Room("East path", "In the north, you see two wolves. You also see an alternative path heading east: a damaged bridge over a furious river.");
 	Room* wolves = new Room("Wolves!", "You're in front of two fierce wolves, what are you going to do?");
 	      wolves->addAttribute("wolves", "true");
 	Room* bridge = new Room("The damaged bridge", "You can take your chances and cross the bridge, but it doesn't look safe.");
 	Room* end = new Room("Sacred temple", "You finally reached the temple! You are pleasently welcome by the monks.");
+	      end->addAttribute("end", "true");
 
 	entities.push_back(crossroad);
 	entities.push_back(westPath);
@@ -164,6 +165,9 @@ ResultEnum World::parseCommand(vector<string> input)
 			cout << "I could not understand the last command." << endl;
 			break;
 	}
+	if (player->isInLastRoom()) {
+		return FINISHED;
+	}
 	return OK;
 }
 
@@ -174,4 +178,15 @@ bool World::isEndCommand(const vector<string> &input)
 		result = true;
 	}
 	return result;
+}
+
+void World::finishGame()
+{
+	cout << "CONGRATULATIONS! You made it to the temple!" << endl;
+	if (player->hasIdol()) {
+		cout << "Thanks for bringing the idol safely! May you have the best of lucks in life!" << endl;
+	}
+	else {
+		cout << "Though, don't be happy, you haven't delivered the idol and failed to do the only task you had to. You're gonna suffer a worse fate than death." << endl;
+	}
 }

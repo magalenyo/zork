@@ -25,15 +25,20 @@ int main()
 
 		cout << endl;
 		ResultEnum result = world.parseCommand(arguments);
+		
 		if (result == QUIT) {
+			cout << "Bye!" << endl;
+			end = true;
+		}
+		else if (result == FINISHED) {
+			world.finishGame();
 			end = true;
 		}
 		else if (result == UNKNOWN) {
-			cout << "Please, enter a valid command" << endl;
+			cout << "Please, enter a valid command." << endl;
 		}
 		
 	}
-	cout << "Bye." << endl;
 	
 	return 0;
 }

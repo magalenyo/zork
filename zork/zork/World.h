@@ -25,7 +25,8 @@ using namespace std;
 enum ResultEnum {
 	OK,
 	QUIT,
-	UNKNOWN
+	UNKNOWN,
+	FINISHED
 };
 
 class World
@@ -42,6 +43,8 @@ public:
 	World();
 	ResultEnum parseCommand(vector<string> input);
 	bool isEndCommand(const vector<string> &input);
+
+	void finishGame();
 protected:
 private:
 

@@ -190,7 +190,7 @@ void Player::drop(const vector<string>& input)
 			return;
 		}
 
-		cout << "You just dropped " << input[1] << " on " << currentRoom->name << endl;
+		cout << "You just dropped " << input[1] << "." << endl;
 		item->changeParentTo(parent);
 	}
 }
@@ -267,7 +267,7 @@ void Player::throwObject(const vector<string>& input)
 	}
 
 	if (getRoom()->hasAttribute("wolves")) {
-		cout << "You throw away the rock and the wolves leave. The path is no longer blocked" << endl;
+		cout << "You throw away the rock and the wolves leave. The path is no longer blocked." << endl;
 		item->changeParentTo(NULL);
 		getRoom()->name = "No more wolves.";
 		getRoom()->description = "The path is now clear. You can now go north to the temple.";
@@ -277,4 +277,24 @@ void Player::throwObject(const vector<string>& input)
 	else {
 		cout << "There's no one here, I shouldn't throw the rock" << endl;
 	}
+}
+
+bool Player::isInLastRoom() const
+{
+	return getRoom()->hasAttribute("end");
+}
+
+bool Player::hasIdol()
+{
+	Item* item = (Item*)find("idol", ITEM);
+
+	Item* backpack = NULL;
+	if (item == NULL) {
+		backpack = getBackpack();							// get backpack
+		if (backpack != NULL) {
+			item = (Item*)backpack->find("idol", ITEM);		// checks if the item exists in the player backpack
+		}
+	}
+
+	return item != NULL;
 }

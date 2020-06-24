@@ -37,6 +37,9 @@ public:
 	void drop(const vector<string> &input);
 	void put(const vector<string> &input);
 	void throwObject(const vector<string> &input);
+
+	bool isInLastRoom() const;
+	bool hasIdol();
 protected:
 private:
 };
