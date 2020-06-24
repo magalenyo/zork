@@ -15,6 +15,9 @@
 #include <vector>
 #include <Entity.h>
 #include <Player.h>
+#include <Exit.h>
+#include <Item.h>
+#include <Commands.h>
 
 using namespace std;
 
@@ -24,12 +27,14 @@ class World
 public:
 protected:
 private:
-	vector<Entity> _entities;
-	Player _player;
+	vector<Entity*> entities;
+	Player* player;
 
 //FUNCTIONS
 public:
 	World();
+	void parseCommand(const vector<string> &input);
+	bool isEndCommand(const vector<string> &input);
 protected:
 private:
 
