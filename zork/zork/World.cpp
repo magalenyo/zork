@@ -144,6 +144,9 @@ ResultEnum World::parseCommand(vector<string> input)
 			if (Commands::TAKE.equals(input[0]) || Commands::PICK.equals(input[0])) {
 				player->take(input);
 			}
+			else if (Commands::UNLOCK.equals(input[0])) {
+				player->unlock(input);
+			}
 			break;
 		default:
 			break;

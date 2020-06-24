@@ -135,3 +135,29 @@ void Player::inventory() const
 		cout << "----------------" << endl;
 	}
 }
+
+void Player::unlock(const vector<string>& input)
+{
+	Exit* targetExit = GetRoom()->getTargetExit(input[1]);
+	if (targetExit == NULL) {
+		cout << "There was nothing in " << input[1] << "." << endl;
+		return;
+	}
+
+	if (!targetExit->locked) {
+		cout << "The way was already unlocked." << endl;
+		return;
+	}
+
+	Item* item = (Item*) find(input[3], ITEM);
+
+	if (item == NULL) {
+		cout << "Could not find " << input[3] << " in your inventory." << endl;
+		return;
+	}
+
+	targetExit->unlock();
+	cout << "You have unlocked " << targetExit->getNameFrom((Room*)parent) << " with " << input[3] << endl;
+
+	
+}

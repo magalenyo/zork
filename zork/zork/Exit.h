@@ -22,6 +22,7 @@ public:
 
 	string getNameFrom(const Room* room) const;
 	Room* getDestinationFrom(const Room* room) const;
+	void unlock();
 };
 
 #endif

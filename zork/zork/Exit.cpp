@@ -27,3 +27,8 @@ Room * Exit::getDestinationFrom(const Room * room) const
 
 	return NULL;
 }
+
+void Exit::unlock()
+{
+	locked = false;
+}

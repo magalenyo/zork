@@ -104,6 +104,7 @@ public:
 	static const Command CUT;
 	static const Command BAR;
 	static const Command LISTEN;
+	static const Command UNLOCK;
 };
 
 #endif //Commands_H
