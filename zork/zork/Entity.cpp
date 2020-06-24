@@ -9,12 +9,15 @@ Entity::Entity(string name, string description, Entity* parent) : name(name), de
 	this->name = name;
 	this->description = description;
 	this->parent = parent;
+
+	if (parent != NULL)
+		parent->elements.push_back(this);
 }
 
 Entity * Entity::find(const string & name, const EntityType &type)
 {
 	for (Entity* entity : elements) {
-		if (entity->name == name && entity->entityType == type) {
+		if (entity->entityType == type && StringUtils::toLowerCase(entity->name) == name) {
 			return entity;
 		}
 	}
@@ -38,7 +41,3 @@ void Entity::look()
 	cout << description << endl;
 }
 
-//Room * Entity::getParentRoom()
-//{
-//	return (Room*) parent;
-//}

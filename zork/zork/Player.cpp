@@ -1,9 +1,5 @@
 #include "Player.h"
 
-//void Player::go() 
-//{
-//}
-
 Item* Player::getBackpack()
 {
 	for (Entity* it : elements) {
@@ -31,6 +27,24 @@ Player::Player(string name, string description, Room* parent) : Character(name, 
 void Player::addItem(Item * item)
 {
 	elements.push_back((Entity*) item);
+}
+
+void Player::go(const vector<string>& input)
+{
+	Exit* targetExit= GetRoom()->getTargetExit(input[1]);
+	if (targetExit == NULL) {
+		cout << "An exit to '" << input[1] << "' can't be found." << endl;
+	}
+	else {
+		if (targetExit->locked) {
+			cout << "The door is locked." << endl;
+		}
+		else {
+			cout << "Going " << input[1] << "\n" << endl;
+			changeParentTo(targetExit->getDestinationFrom((Room*)parent));
+			parent->look();
+		}
+	}
 }
 
 void Player::take(const vector<string> &input)
@@ -90,7 +104,7 @@ void Player::take(const vector<string> &input)
 	
 }
 
-void Player::look(const vector<string>& input) const
+void Player::look() const
 {
 	/*if (input.size() > 1) {
 		for (Entity* entity : parent->elements) {
@@ -101,7 +115,7 @@ void Player::look(const vector<string>& input) const
 		parent->look();
 		for (Entity* entity : parent->elements) {
 			if (entity->entityType == ITEM) {
-				entity->look();
+				((Item*) entity)->look();
 			}
 		}
 	//}

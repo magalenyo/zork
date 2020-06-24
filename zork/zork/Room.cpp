@@ -24,3 +24,23 @@ bool Room::existsInRoom(Entity * entity)
 	}
 	return false;
 }
+
+Exit * Room::getTargetExit(const string & direction) const
+{
+	for (Entity* entity : elements) {
+		if (entity->entityType == EXIT) {
+			Exit* exit = (Exit*)entity;
+			// exit->parent is origin
+			if (exit->getNameFrom(this) == direction) {
+				return exit;
+			}
+			/*if (this == exit->parent && exit->name == direction) {
+				return exit;
+			}
+			else if (this == exit->destination && exit->oppositeName == direction) {
+				return exit;
+			}*/
+		}
+	}
+	return NULL;
+}

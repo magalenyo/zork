@@ -40,7 +40,7 @@ private:
 //FUNCTIONS
 public:
 	World();
-	ResultEnum parseCommand(const vector<string> &input);
+	ResultEnum parseCommand(vector<string> input);
 	bool isEndCommand(const vector<string> &input);
 protected:
 private:

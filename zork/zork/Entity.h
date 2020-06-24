@@ -14,6 +14,7 @@
 #include <list>
 #include <iostream>
 #include <string>
+#include <StringUtils.h>
 
 using namespace std;
 
@@ -46,7 +47,6 @@ public:
 	void changeParentTo(Entity* newParent);
 
 	virtual void look();
-	//Room* getParentRoom();
 protected:
 private:
 

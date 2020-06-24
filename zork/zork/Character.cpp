@@ -9,6 +9,11 @@ Character::Character(string name, string description, Room* parent) : Entity(nam
 	entityType = CHARACTER;
 }
 
+Room * Character::GetRoom() const
+{
+	return (Room*)parent;
+}
+
 //void Character::go(const vector<string>& input)
 //{
 //	

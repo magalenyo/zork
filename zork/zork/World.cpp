@@ -7,7 +7,7 @@ World::World()
 	Room* westPath = new Room("West path", "You see what appears to be an empty house on the west and a road to the north.");
 	Room* road = new Room("Road", "The road is a dead end, but you see a treehouse you can climb.");
 	Room* treehouse = new Room("Treehouse", "You've climbed up to the treehouse. In the distance, you can see the temple.");
-	Room* entrance = new Room("House entrance", "You're at the entrance and you knock, but there's no answer. The door is locked.");
+	Room* entrance = new Room("House entrance", "You're at the entrance and you knock, but there's no answer. The door is locked and facing west.");
 	Room* house = new Room("House", "You finally got into the house");
 	Room* eastPath = new Room("East path", "Two wolves are blocking the path. You see an alternative path heading east: a damaged bridge over a furious river.");
 	Room* wolves = new Room("Wolves!", "You're in front of two fierce wolves, what are you going to do?");
@@ -51,13 +51,13 @@ World::World()
 	entities.push_back(bridgePathToEnd);
 
 	//Items
-	Item* goldenIdol = new Item("Golden Idol", "This is the sacred idol, small but heavy.", NULL, OBJECTIVE);
-	Item* key = new Item("Rusty key", "This is the key to the house, looks old and rusty.", NULL, UTIL);
-	Item* berries = new Item("Berries", "Juicy berries.", NULL, CONSUMABLE);
-	Item* sword = new Item("Sword", "A nice sharp sword", NULL, WEAPON);
-	Item* rock = new Item("Rock", "Just a regular rock. This can make some noise.", NULL, UTIL);
-	Item* backpack = new Item("Backpack", "With it, you can carry more objects.", NULL, UTIL);
-	Item* coins = new Item("Golden coins", "Shiny golden coins.", NULL, UTIL);
+	Item* goldenIdol = new Item("Idol", "This is the sacred idol, small but heavy, and most importantly, GOLDEN!", player, OBJECTIVE);
+	Item* key = new Item("Key", "This is the key to the house, looks old and rusty.", treehouse, UTIL);
+	Item* berries = new Item("Berries", "Juicy berries.", road, CONSUMABLE);
+	Item* sword = new Item("Sword", "A nice sharp sword", house, WEAPON);
+	Item* rock = new Item("Rock", "Just a regular rock. This can make some noise.", westPath, UTIL);
+	Item* backpack = new Item("Backpack", "With it, you can carry more objects.", treehouse, UTIL);
+	Item* coins = new Item("Coins", "Shiny golden coins.", bridge, UTIL);
 	// add sign?
 
 	entities.push_back(goldenIdol);
@@ -68,13 +68,12 @@ World::World()
 	entities.push_back(backpack);
 	entities.push_back(coins);
 
-	house->addItem(sword);
+	/*house->addItem(sword);
 	treehouse->addItem(key);
 	treehouse->addItem(backpack);
 	road->addItem(rock);
 	road->addItem(berries);
-	
-	bridge->addItem(coins);
+	bridge->addItem(coins);*/
 
 	// Characters
 	Character* wolf1 = new Character("A big wolf", "This wolf has razor sharp teeth.", wolves);
@@ -82,38 +81,58 @@ World::World()
 	
 	player = new Player("Player", "You're a braverous explorer. Your mission is to find your way to the temple to deliver the idol.", crossroad);
 	player->addItem(goldenIdol);
-	goldenIdol->elements.push_back(key);
+	/*goldenIdol->elements.push_back(key);
 	key->elements.push_back(sword);
-	player->addItem(rock);
+	player->addItem(rock);*/
 	
 	entities.push_back(wolf1);
 	entities.push_back(wolf2);
 	entities.push_back(player);
 	
-
-	
+	player->look();
 }
 
-ResultEnum World::parseCommand(const vector<string> &input)
+ResultEnum World::parseCommand(vector<string> input)
 {
 	switch (input.size()) {
 		case 0:
 			return UNKNOWN;
 			break;
 		case 1:
-			if (Commands::NORTH.equals(input[0])) {
-				//player.go(input);
+			if (Commands::NORTH.equals(input[0])){
+				input.push_back("north");
+				player->go(input);
+			}
+			else if (Commands::SOUTH.equals(input[0])) {
+				input.push_back("south");
+				player->go(input);
+			}
+			else if (Commands::EAST.equals(input[0])) {
+				input.push_back("east");
+				player->go(input);
+			}
+			else if (Commands::WEST.equals(input[0])) {
+				input.push_back("west");
+				player->go(input);
+			}
+			else if (Commands::UP.equals(input[0])) {
+				input.push_back("up");
+				player->go(input);
+			}
+			else if (Commands::DOWN.equals(input[0])) {
+				input.push_back("down");
+				player->go(input);
 			}
 			else if (Commands::LOOK.equals(input[0])) {
-				player->look(input);
+				player->look();
 			}
 			else if (Commands::INVENTORY.equals(input[0])) {
 				player->inventory();
 			}
 			break;
 		case 2:
-			if (Commands::NORTH.equals(input[1])) {
-				//player.go(input);
+			if (Commands::GO.equals(input[0])) {
+				player->go(input);
 			}
 			else if (Commands::TAKE.equals(input[0]) || Commands::PICK.equals(input[0])) {
 				player->take(input);

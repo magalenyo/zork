@@ -3,6 +3,9 @@
 
 #include "Entity.h"
 #include "Item.h"
+#include "Exit.h"
+
+class Exit;	// needed otherwise error
 
 using namespace std;
 
@@ -14,6 +17,7 @@ public:
 
 	void addItem(Item *item);
 	bool existsInRoom(Entity *entity);
+	Exit* getTargetExit(const string &direction) const;
 };
 
 #endif

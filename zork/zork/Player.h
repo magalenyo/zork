@@ -29,8 +29,9 @@ public:
 	Player(string name, string description, Room *parent);
 
 	void addItem(Item *item);
+	void go(const vector<string> &input);
 	void take(const vector<string> &input);
-	void look(const vector<string> &input) const;
+	void look() const;
 	void inventory() const;
 protected:
 private:
