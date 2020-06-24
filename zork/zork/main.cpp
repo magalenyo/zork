@@ -5,37 +5,26 @@ using namespace std;
 #include <iostream>
 #include <string>
 #include <vector>
-#include <sstream> 
+
 #include <World.h>
 #include <Commands.h>
-
-// pre: param is a string separated by spaces
-// post: returns a vector of string; this vector is the param tokenized
-vector<string> tokenize(string param) {
-	vector<string> result;
-
-	istringstream iss( param );
-	string str;
-	while (iss >> str) {
-		result.push_back(str);
-	}
-
-	return result;
-}
+#include <StringUtils.h>
 
 int main()
 {
 	cout << "Welcome to ZORK." << endl;
 	World world;
 	string input;
-	vector<string> arguments = tokenize(input);
+	vector<string> arguments;
 	bool end = false;
 
 	while (!end) {
 		getline(cin, input);
-		arguments = tokenize(input);
+		string lowCaseInput = StringUtils::toLowerCase(input);
+		arguments = StringUtils::tokenize(lowCaseInput);
+
 		cout << endl;
-		ResultEnum result = world.parseCommand(tokenize(input));
+		ResultEnum result = world.parseCommand(arguments);
 		if (result == QUIT) {
 			end = true;
 		}
