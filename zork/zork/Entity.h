@@ -16,19 +16,30 @@
 
 using namespace std;
 
+enum EntityType {
+	ENTITY,
+	ROOM,
+	EXIT,
+	ITEM,
+	CHARACTER,
+	PLAYER
+};
+
 class Entity
 {
 // VARIABLES
 public:
-protected:
-private:
-	vector<Entity> _elements;
-	string _name;
-	string _description;
-
+	vector<Entity*> elements;
+	string name;
+	string description;
+	EntityType entityType;
+	Entity *parent;
 
 //FUNCTIONS
 public:
+	Entity();
+	Entity(string name, string description, Entity* parent);
+	//Room* getParentRoom();
 protected:
 private:
 
