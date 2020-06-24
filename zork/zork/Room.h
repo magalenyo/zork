@@ -13,6 +13,7 @@ public:
 	Room(string name, string description);
 
 	void addItem(Item *item);
+	bool existsInRoom(Entity *entity);
 };
 
 #endif

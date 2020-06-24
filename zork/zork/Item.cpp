@@ -5,3 +5,17 @@ Item::Item(string name, string description, Entity * parent, ItemType itemType) 
 	this->entityType = ITEM;
 	this->itemType = itemType;
 }
+
+void Item::look()
+{
+	//Entity::look();
+	cout << "- " << name << ". " << description << endl;
+	if (!elements.empty()) {
+		cout << "-> Content of " << name << ":" << endl;
+		for (Entity* entity : elements) {
+			cout << "   "; ((Item*)entity)->look();
+		}
+	}
+	
+}
+

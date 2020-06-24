@@ -19,7 +19,14 @@
 #include <Item.h>
 #include <Commands.h>
 
+
 using namespace std;
+
+enum ResultEnum {
+	OK,
+	QUIT,
+	UNKNOWN
+};
 
 class World
 {
@@ -33,7 +40,7 @@ private:
 //FUNCTIONS
 public:
 	World();
-	void parseCommand(const vector<string> &input);
+	ResultEnum parseCommand(const vector<string> &input);
 	bool isEndCommand(const vector<string> &input);
 protected:
 private:

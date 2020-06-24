@@ -57,6 +57,8 @@ World::World()
 	Item* sword = new Item("Sword", "A nice sharp sword", NULL, WEAPON);
 	Item* rock = new Item("Rock", "Just a regular rock. This can make some noise.", NULL, UTIL);
 	Item* backpack = new Item("Backpack", "With it, you can carry more objects.", NULL, UTIL);
+	Item* coins = new Item("Golden coins", "Shiny golden coins.", NULL, UTIL);
+	// add sign?
 
 	entities.push_back(goldenIdol);
 	entities.push_back(key);
@@ -64,14 +66,25 @@ World::World()
 	entities.push_back(sword);
 	entities.push_back(rock);
 	entities.push_back(backpack);
+	entities.push_back(coins);
 
-	//treehouse->
+	house->addItem(sword);
+	treehouse->addItem(key);
+	treehouse->addItem(backpack);
+	road->addItem(rock);
+	road->addItem(berries);
+	
+	bridge->addItem(coins);
 
 	// Characters
 	Character* wolf1 = new Character("A big wolf", "This wolf has razor sharp teeth.", wolves);
 	Character* wolf2 = new Character("A smaller wolf", "Not so threatening, but still dangerous.", wolves);
 	
 	player = new Player("Player", "You're a braverous explorer. Your mission is to find your way to the temple to deliver the idol.", crossroad);
+	player->addItem(goldenIdol);
+	goldenIdol->elements.push_back(key);
+	key->elements.push_back(sword);
+	player->addItem(rock);
 	
 	entities.push_back(wolf1);
 	entities.push_back(wolf2);
@@ -81,25 +94,42 @@ World::World()
 	
 }
 
-void World::parseCommand(const vector<string> &input)
+ResultEnum World::parseCommand(const vector<string> &input)
 {
 	switch (input.size()) {
 		case 0:
+			return UNKNOWN;
+			break;
+		case 1:
 			if (Commands::NORTH.equals(input[0])) {
 				//player.go(input);
 			}
-			break;
-		case 1:
+			else if (Commands::LOOK.equals(input[0])) {
+				player->look(input);
+			}
+			else if (Commands::INVENTORY.equals(input[0])) {
+				player->inventory();
+			}
 			break;
 		case 2:
+			if (Commands::NORTH.equals(input[1])) {
+				//player.go(input);
+			}
+			else if (Commands::TAKE.equals(input[0]) || Commands::PICK.equals(input[0])) {
+				player->take(input);
+			}
 			break;
 		case 3:
 			break;
 		case 4:
+			if (Commands::TAKE.equals(input[0]) || Commands::PICK.equals(input[0])) {
+				player->take(input);
+			}
 			break;
 		default:
 			break;
 	}
+	return OK;
 }
 
 bool World::isEndCommand(const vector<string> &input)

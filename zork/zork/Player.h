@@ -11,6 +11,7 @@
 #define Player_h
 
 #include "Character.h"
+#include <vector>
 
 class Player : public Character
 {
@@ -18,12 +19,19 @@ class Player : public Character
 public:
 protected:
 private:
+	Item* getBackpack();
+	bool enoughInventorySpace() const;
 
 
 //FUNCTIONS
 public:
 	Player();
 	Player(string name, string description, Room *parent);
+
+	void addItem(Item *item);
+	void take(const vector<string> &input);
+	void look(const vector<string> &input) const;
+	void inventory() const;
 protected:
 private:
 };

@@ -14,5 +14,6 @@ public:
 	ItemType itemType;
 public:
 	Item(string name, string description, Entity* parent, ItemType itemType);
+	void look() override;
 };
 

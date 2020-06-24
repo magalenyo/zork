@@ -9,6 +9,9 @@ using namespace std;
 class Character : public Entity
 {
 public:
+	//Room* room;
+
+public:
 	Character();
 	Character(string name, string description, Room *parent);
 

@@ -27,16 +27,22 @@ int main()
 {
 	cout << "Welcome to ZORK." << endl;
 	World world;
-	
-
 	string input;
-	getline(cin, input);
 	vector<string> arguments = tokenize(input);
+	bool end = false;
 
-	while (!world.isEndCommand(arguments)) {
-		
+	while (!end) {
 		getline(cin, input);
 		arguments = tokenize(input);
+		cout << endl;
+		ResultEnum result = world.parseCommand(tokenize(input));
+		if (result == QUIT) {
+			end = true;
+		}
+		else if (result == UNKNOWN) {
+			cout << "Please, enter a valid command" << endl;
+		}
+		
 	}
 	cout << "Bye." << endl;
 	

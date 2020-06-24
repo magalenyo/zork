@@ -11,7 +11,8 @@
 #ifndef Entity_h
 #define Entity_h
 
-#include <vector>
+#include <list>
+#include <iostream>
 #include <string>
 
 using namespace std;
@@ -29,16 +30,22 @@ class Entity
 {
 // VARIABLES
 public:
-	vector<Entity*> elements;
 	string name;
 	string description;
 	EntityType entityType;
+
+	list<Entity*> elements;
 	Entity *parent;
 
 //FUNCTIONS
 public:
 	Entity();
 	Entity(string name, string description, Entity* parent);
+
+	Entity* find(const string &name, const EntityType &type);
+	void changeParentTo(Entity* newParent);
+
+	virtual void look();
 	//Room* getParentRoom();
 protected:
 private:
