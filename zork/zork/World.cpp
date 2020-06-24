@@ -13,6 +13,7 @@ World::World()
 	Room* wolves = new Room("Wolves!", "You're in front of two fierce wolves, what are you going to do?");
 	      wolves->addAttribute("wolves", "true");
 	Room* bridge = new Room("The damaged bridge", "You can take your chances and cross the bridge, but it doesn't look safe.");
+	      bridge->addAttribute("bridge", "true");
 	Room* end = new Room("Sacred temple", "You're almost there...");
 	      end->addAttribute("end", "true");
 
@@ -41,6 +42,7 @@ World::World()
 		  wolvesPathToEnd->blocked = true;
 	Exit* eastPathToBridge = new Exit("east", "west", "Bridge path", eastPath, bridge);
 	Exit* bridgePathToEnd = new Exit("north", "south", "To the temple", bridge, end);
+	      bridgePathToEnd->blocked = true;
 
 	entities.push_back(crossroadToWestPath);
 	entities.push_back(westPathToRoad);
@@ -132,6 +134,12 @@ ResultEnum World::parseCommand(vector<string> input)
 			else if (Commands::FIGHT.equals(input[0])) {
 				player->fight();
 			}
+			else if (Commands::CHANCES.equals(input[0])) {
+				player->chances();
+			}
+			else if (Commands::CROSS.equals(input[0])) {
+				player->cross();
+			}
 			else {
 				cout << "I could not understand the last command." << endl;
 			}
@@ -174,7 +182,7 @@ ResultEnum World::parseCommand(vector<string> input)
 			cout << "I could not understand the last command." << endl;
 			break;
 	}
-	if (player->isInLastRoom()) {
+	if (player->isInLastRoom() || player->isDead()) {
 		return FINISHED;
 	}
 	return OK;
@@ -182,16 +190,22 @@ ResultEnum World::parseCommand(vector<string> input)
 
 void World::finishGame()
 {
-	if (player->isWounded()) {
-		cout << "You have grievous wounds and way too exhausted to continue... You die before getting to the temple." << endl;
+	if (player->isDead()) {
+		cout << "You didn't make it to the other side of the river. The bridge collapsed and you died drowned." << endl;
+		cout << "The gold idol got lost for ever..." << endl;
 	}
 	else {
-		cout << "CONGRATULATIONS! You made it to the temple!" << endl;
-		if (player->hasIdol()) {
-			cout << "Thanks for bringing the idol safely! May you have the best of lucks in life!" << endl;
+		if (player->isWounded()) {
+			cout << "You have grievous wounds and way too exhausted to continue... You die before getting to the temple." << endl;
 		}
 		else {
-			cout << "But... don't be so happy, you haven't delivered the idol and failed to do the only task you had to. You're gonna suffer a worse fate than death." << endl;
+			cout << "CONGRATULATIONS! You made it to the temple!" << endl;
+			if (player->hasIdol()) {
+				cout << "Thanks for bringing the idol safely! May you have the best of lucks in life!" << endl;
+			}
+			else {
+				cout << "But... don't be so happy, you haven't delivered the idol and failed to do the only task you had to. You're gonna suffer a worse fate than death." << endl;
+			}
 		}
 	}
 }

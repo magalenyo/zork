@@ -336,6 +336,54 @@ void Player::eat(const vector<string>& input)
 	}
 }
 
+void Player::chances()
+{
+	if (getRoom()->hasAttribute("bridge")) {
+		cout << "You are trying to calculate your chances of crossing the bridge..." << endl;
+		cout << "You have " << calculateChances() << "% chance of getting to the other side of the river." << endl;
+	}
+	else {
+		cout << "You can't calculate your chances of getting to the other side of the river here." << endl;
+	}
+}
+
+int Player::calculateChances() const
+{
+	int chance = 90;		// base chance due to the bad state of the bridge
+	for (Entity* entity : elements) {
+		Item* item = (Item*)entity;
+		chance -= item->getBridgeChance();
+		for (Entity* subEntity : item->elements) {
+			chance -= item->getBridgeChance();
+		}
+	}
+	return chance;
+}
+
+void Player::cross()
+{
+	if (getRoom()->hasAttribute("bridge")) {
+		int currentChance = calculateChances();
+		cout << "You take your " << currentChance << "% chance of crossing the bridge and..." << endl;
+		srand(time(NULL));
+		int chance = rand() % 100 + 0;		/* generate secret number between 0 and 100: */
+		if (chance <= currentChance) {		// made it
+			cout << "YOU MADE IT!" << endl;
+			Exit* targetExit = getRoom()->getTargetExit("north");
+			targetExit->blocked = false;
+			vector<string> input = { "", "north" };
+			go(input);
+		}
+		else {								// died
+			addAttribute("dead", "true");
+		}
+	}
+	else {
+		cout << "You are not near the bridge." << endl;
+	}
+}
+
+
 bool Player::isInLastRoom() const
 {
 	return getRoom()->hasAttribute("end");
@@ -360,5 +408,10 @@ bool Player::hasIdol()
 	}
 
 	return item != NULL;
+}
+
+bool Player::isDead()
+{
+	return hasAttribute("dead");
 }
 

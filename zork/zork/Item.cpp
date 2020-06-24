@@ -19,3 +19,25 @@ void Item::look()
 	
 }
 
+int Item::getBridgeChance() const
+{
+	int chance = 0;
+	switch(itemType) {
+		case WEAPON:
+			chance = 15;
+			break;
+		case CONSUMABLE:
+			chance = 5;
+			break;
+		case OBJECTIVE:
+			chance = 20;
+			break;
+		case UTIL:
+			chance = 2;
+		default:			// throwable
+			chance = 10;
+			break;
+	}
+	return chance;
+}
+

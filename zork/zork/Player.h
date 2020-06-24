@@ -12,6 +12,7 @@
 
 #include "Character.h"
 #include <vector>
+#include <time.h> 
 
 class Player : public Character
 {
@@ -21,6 +22,7 @@ protected:
 private:
 	Item* getBackpack();
 	bool enoughInventorySpace() const;
+	int calculateChances() const;
 
 
 //FUNCTIONS
@@ -39,10 +41,13 @@ public:
 	void throwObject(const vector<string> &input);
 	void fight();
 	void eat(const vector<string> &input);
+	void chances();
+	void cross();
 
 	bool isInLastRoom() const;
 	bool isWounded();
 	bool hasIdol();
+	bool isDead();
 	
 protected:
 private:
