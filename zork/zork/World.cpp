@@ -146,8 +146,6 @@ ResultEnum World::parseCommand(vector<string> input)
 				cout << "I could not understand the last command." << endl;
 			}
 			break;
-		case 3:
-			break;
 		case 4:
 			if (Commands::TAKE.equals(input[0]) || Commands::PICK.equals(input[0])) {
 				player->take(input);
@@ -163,9 +161,7 @@ ResultEnum World::parseCommand(vector<string> input)
 			}
 			break;
 		default:
-			
 			cout << "I could not understand the last command." << endl;
-			
 			break;
 	}
 	return OK;

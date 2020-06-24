@@ -273,4 +273,7 @@ void Player::throwObject(const vector<string>& input)
 		Exit* targetExit = getRoom()->getTargetExit("north");
 		targetExit->blocked = false;
 	}
+	else {
+		cout << "There's no one here, I shouldn't throw the rock" << endl;
+	}
 }
