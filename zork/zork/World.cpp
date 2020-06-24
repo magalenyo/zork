@@ -96,7 +96,10 @@ ResultEnum World::parseCommand(vector<string> input)
 			return UNKNOWN;
 			break;
 		case 1:
-			if (Commands::NORTH.equals(input[0])){
+			if (input.size() == 1 && Commands::QUIT.equals(input[0])) {
+				return QUIT;
+			}
+			else if (Commands::NORTH.equals(input[0])){
 				input.push_back("north");
 				player->go(input);
 			}
@@ -146,6 +149,9 @@ ResultEnum World::parseCommand(vector<string> input)
 			else if (Commands::THROW.equals(input[0])) {
 				player->throwObject(input);
 			}
+			else if (Commands::EAT.equals(input[0])) {
+				player->eat(input);
+			}
 			else {
 				cout << "I could not understand the last command." << endl;
 			}
@@ -174,15 +180,6 @@ ResultEnum World::parseCommand(vector<string> input)
 	return OK;
 }
 
-bool World::isEndCommand(const vector<string> &input)
-{
-	bool result = false;
-	if (input.size() == 1 && Commands::QUIT.equals(input[0])) {
-		result = true;
-	}
-	return result;
-}
-
 void World::finishGame()
 {
 	if (player->isWounded()) {
@@ -197,5 +194,4 @@ void World::finishGame()
 			cout << "But... don't be so happy, you haven't delivered the idol and failed to do the only task you had to. You're gonna suffer a worse fate than death." << endl;
 		}
 	}
-	
 }

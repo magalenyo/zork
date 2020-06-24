@@ -42,7 +42,6 @@ private:
 public:
 	World();
 	ResultEnum parseCommand(vector<string> input);
-	bool isEndCommand(const vector<string> &input);
 
 	void finishGame();
 protected:

@@ -52,6 +52,7 @@ public:
 	virtual void look();
 
 	void addAttribute(string key, string value);
+	void deleteAttribute(string key);
 	string findAttributeValue(string key);
 	bool hasAttribute(string key);
 protected:

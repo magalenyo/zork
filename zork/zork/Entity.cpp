@@ -49,6 +49,11 @@ void Entity::addAttribute(string key, string value)
 	attributes[key] = value;
 }
 
+void Entity::deleteAttribute(string key)
+{
+	attributes.erase(key);
+}
+
 string Entity::findAttributeValue(string key)
 {
 	auto it = attributes.find(key);

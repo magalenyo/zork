@@ -310,6 +310,32 @@ void Player::fight()
 	}
 }
 
+void Player::eat(const vector<string>& input)
+{
+	Item* item = (Item*)find(input[1], ITEM);
+	Item* backpack = NULL;
+	if (item == NULL) {
+		backpack = getBackpack();
+		if (backpack != NULL) {
+			item = (Item*)backpack->find(input[1], ITEM);			// checks if the item exists in the player backpack
+		}
+	}
+
+	if (item == NULL) {
+		cout << input[1] << " could not be found in the inventory" << (getBackpack() != NULL ? " / backpack." : ".") << endl;
+		return;
+	}
+
+	if (item->itemType == CONSUMABLE) {
+		item->changeParentTo(NULL);
+		deleteAttribute("wounded");
+		cout << "You ate " << input[1] << " and you feel better now." << endl;
+	}
+	else {
+		cout << "You can't eat " << input[1] << "." << endl;
+	}
+}
+
 bool Player::isInLastRoom() const
 {
 	return getRoom()->hasAttribute("end");

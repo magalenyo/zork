@@ -38,6 +38,7 @@ public:
 	void put(const vector<string> &input);
 	void throwObject(const vector<string> &input);
 	void fight();
+	void eat(const vector<string> &input);
 
 	bool isInLastRoom() const;
 	bool isWounded();
