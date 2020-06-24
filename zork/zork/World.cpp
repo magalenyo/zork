@@ -8,7 +8,7 @@ World::World()
 	Room* road = new Room("Road", "The road is a dead end, but you see a treehouse you can climb.");
 	Room* treehouse = new Room("Treehouse", "You've climbed up to the treehouse. In the distance, you can see the temple.");
 	Room* entrance = new Room("House entrance", "You're at the entrance and you knock, but there's no answer. The door is locked and facing west.");
-	Room* house = new Room("House", "You finally got into the house");
+	Room* house = new Room("House", "You are in the house.");
 	Room* eastPath = new Room("East path", "Two wolves are blocking the path. You see an alternative path heading east: a damaged bridge over a furious river.");
 	Room* wolves = new Room("Wolves!", "You're in front of two fierce wolves, what are you going to do?");
 	      wolves->addAttribute("wolves", "true");

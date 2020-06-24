@@ -141,7 +141,7 @@ void Player::unlock(const vector<string>& input)
 {
 	Exit* targetExit = getRoom()->getTargetExit(input[1]);
 	if (targetExit == NULL) {
-		cout << "There was nothing in " << input[1] << "." << endl;
+		cout << "There was no exist called " << input[1] << "." << endl;
 		return;
 	}
 
@@ -166,7 +166,8 @@ void Player::unlock(const vector<string>& input)
 	}
 
 	targetExit->unlock();
-	cout << "You have unlocked " << targetExit->getNameFrom((Room*)parent) << " with " << input[3] << endl;
+	cout << "You have unlocked " << targetExit->getNameFrom((Room*)parent) << " with " << input[3] << "." << endl;
+	parent->description = "The door is open.";
 }
 
 void Player::drop(const vector<string>& input)
