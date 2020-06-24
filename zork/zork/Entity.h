@@ -41,6 +41,7 @@ public:
 //FUNCTIONS
 public:
 	Entity();
+	~Entity();
 	Entity(string name, string description, Entity* parent);
 
 	Entity* find(const string &name, const EntityType &type);

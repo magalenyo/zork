@@ -36,6 +36,7 @@ public:
 	void unlock(const vector<string> &input);
 	void drop(const vector<string> &input);
 	void put(const vector<string> &input);
+	void throwObject(const vector<string> &input);
 protected:
 private:
 };

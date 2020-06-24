@@ -1,8 +1,8 @@
 #include "Exit.h"
 
-Exit::Exit(string name, string oppositeName, string description, Room* origin, Room* destination) : 
-	Entity(name, description, (Entity*) origin),
-	locked(false), key(NULL), destination(destination), oppositeName(oppositeName)
+Exit::Exit(string name, string oppositeName, string description, Room* origin, Room* destination) :
+	Entity(name, description, (Entity*)origin),
+	locked(false), blocked(false), key(NULL), destination(destination), oppositeName(oppositeName)
 {
 	this->entityType = EXIT;
 	destination->elements.push_back(this);

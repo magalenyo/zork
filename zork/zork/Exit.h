@@ -13,6 +13,7 @@ class Exit : public Entity
 {
 public:
 	bool locked;
+	bool blocked;
 	Room* destination;
 	string oppositeName;
 	Entity* key;

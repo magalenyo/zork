@@ -5,7 +5,8 @@ enum ItemType {
 	WEAPON,
 	UTIL,
 	CONSUMABLE,
-	OBJECTIVE
+	OBJECTIVE,
+	THROWABLE
 };
 
 class Item : public Entity

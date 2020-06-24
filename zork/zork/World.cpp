@@ -11,6 +11,7 @@ World::World()
 	Room* house = new Room("House", "You finally got into the house");
 	Room* eastPath = new Room("East path", "Two wolves are blocking the path. You see an alternative path heading east: a damaged bridge over a furious river.");
 	Room* wolves = new Room("Wolves!", "You're in front of two fierce wolves, what are you going to do?");
+	      wolves->addAttribute("wolves", "true");
 	Room* bridge = new Room("The damaged bridge", "You can take your chances and cross the bridge, but it doesn't look safe.");
 	Room* end = new Room("Sacred temple", "You finally reached the temple! You are pleasently welcome by the monks.");
 
@@ -36,6 +37,7 @@ World::World()
 	Exit* crossroadToEastPath = new Exit("east", "west", "To the east path", crossroad, eastPath);
 	Exit* eastPathToWolves= new Exit("north", "south", "To wolves path", eastPath, wolves);
 	Exit* wolvesPathToEnd = new Exit("north", "south", "To the temple", wolves, end);
+		  wolvesPathToEnd->blocked = true;
 	Exit* eastPathToBridge = new Exit("east", "west", "Bridge path", eastPath, bridge);
 	Exit* bridgePathToEnd = new Exit("north", "south", "To the temple", bridge, end);
 
@@ -56,8 +58,8 @@ World::World()
 	Item* goldenIdol = new Item("Idol", "This is the sacred idol, small but heavy, and most importantly, GOLDEN!", player, OBJECTIVE);
 	Item* key = new Item("Key", "This is the key to the house, looks old and rusty.", treehouse, UTIL);
 	Item* berries = new Item("Berries", "Juicy berries.", road, CONSUMABLE);
-	Item* sword = new Item("Sword", "A nice sharp sword", house, WEAPON);
-	Item* rock = new Item("Rock", "Just a regular rock. This can make some noise.", westPath, UTIL);
+	Item* sword = new Item("Sword", "A nice and sharp sword.", house, WEAPON);
+	Item* rock = new Item("Rock", "Just a regular rock. This can make some noise and distract.", westPath, THROWABLE);
 	Item* backpack = new Item("Backpack", "With it, you can carry more objects.", treehouse, UTIL);
 	Item* coins = new Item("Coins", "Shiny golden coins.", bridge, UTIL);
 	// add sign?
@@ -136,6 +138,9 @@ ResultEnum World::parseCommand(vector<string> input)
 			}
 			else if (Commands::DROP.equals(input[0])) {
 				player->drop(input);
+			}
+			else if (Commands::THROW.equals(input[0])) {
+				player->throwObject(input);
 			}
 			else {
 				cout << "I could not understand the last command." << endl;

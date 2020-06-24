@@ -34,13 +34,29 @@ Exit * Room::getTargetExit(const string & direction) const
 			if (exit->getNameFrom(this) == direction) {
 				return exit;
 			}
-			/*if (this == exit->parent && exit->name == direction) {
-				return exit;
-			}
-			else if (this == exit->destination && exit->oppositeName == direction) {
-				return exit;
-			}*/
 		}
 	}
 	return NULL;
+}
+
+void Room::addAttribute(string key, string value)
+{
+	attributes[key] = value;
+}
+
+string Room::findAttributeValue(string key)
+{
+	auto it = attributes.find(key);
+	if (it != attributes.end()) {
+		return it->second;
+	}
+	else {
+		return "error";
+	}
+}
+
+bool Room::hasAttribute(string key)
+{
+	auto it = attributes.find(key);
+	return it != attributes.end();
 }

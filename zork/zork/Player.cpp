@@ -39,6 +39,9 @@ void Player::go(const vector<string>& input)
 		if (targetExit->locked) {
 			cout << "The door is locked." << endl;
 		}
+		else if (targetExit->blocked) {
+			cout << "The path is blocked." << endl;
+		}
 		else {
 			cout << "Going " << input[1] << "\n" << endl;
 			changeParentTo(targetExit->getDestinationFrom((Room*)parent));
@@ -240,4 +243,34 @@ void Player::put(const vector<string>& input)
 	cout << "You just put " << input[1] << " into " << input[3] << "." << endl;
 	item->changeParentTo(placeToPut);
 
+}
+
+void Player::throwObject(const vector<string>& input)
+{
+	Item* item = (Item*)find(input[1], ITEM);
+	Item* backpack = NULL;
+	if (item == NULL) {
+		backpack = getBackpack();
+		if (backpack != NULL) {
+			item = (Item*)backpack->find(input[1], ITEM);			// checks if the item exists in the player backpack
+		}
+	}
+	if (item == NULL) {
+		cout << input[1] << " could not be found in the inventory" << (getBackpack() != NULL ? " / backpack." : ".") << endl;
+		return;
+	}
+
+	if (item->itemType != THROWABLE) {
+		cout << input[1] << " cannot be thrown." << endl;
+		return;
+	}
+
+	if (getRoom()->hasAttribute("wolves")) {
+		cout << "You throw away the rock and the wolves leave. The path is no longer blocked" << endl;
+		item->changeParentTo(NULL);
+		getRoom()->name = "No more wolves.";
+		getRoom()->description = "The path is now clear. You can now go north to the temple.";
+		Exit* targetExit = getRoom()->getTargetExit("north");
+		targetExit->blocked = false;
+	}
 }
