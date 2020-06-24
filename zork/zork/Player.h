@@ -10,9 +10,9 @@
 #ifndef Player_h
 #define Player_h
 
-#include "Entity.h"
+#include "Character.h"
 
-class Player : public Entity
+class Player : public Character
 {
 // VARIABLES
 public:
@@ -22,6 +22,8 @@ private:
 
 //FUNCTIONS
 public:
+	Player();
+	Player(string name, string description, Room *parent);
 protected:
 private:
 };
