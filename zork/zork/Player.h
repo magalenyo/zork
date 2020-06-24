@@ -34,6 +34,7 @@ public:
 	void look() const;
 	void inventory() const;
 	void unlock(const vector<string> &input);
+	void drop(const vector<string> &input);
 protected:
 private:
 };

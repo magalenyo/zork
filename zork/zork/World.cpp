@@ -50,6 +50,8 @@ World::World()
 	entities.push_back(eastPathToBridge);
 	entities.push_back(bridgePathToEnd);
 
+	player = new Player("Player", "You're a braverous explorer. Your mission is to find your way to the temple to deliver the idol.", crossroad);
+
 	//Items
 	Item* goldenIdol = new Item("Idol", "This is the sacred idol, small but heavy, and most importantly, GOLDEN!", player, OBJECTIVE);
 	Item* key = new Item("Key", "This is the key to the house, looks old and rusty.", treehouse, UTIL);
@@ -79,7 +81,6 @@ World::World()
 	Character* wolf1 = new Character("A big wolf", "This wolf has razor sharp teeth.", wolves);
 	Character* wolf2 = new Character("A smaller wolf", "Not so threatening, but still dangerous.", wolves);
 	
-	player = new Player("Player", "You're a braverous explorer. Your mission is to find your way to the temple to deliver the idol.", crossroad);
 	player->addItem(goldenIdol);
 	/*goldenIdol->elements.push_back(key);
 	key->elements.push_back(sword);
@@ -136,6 +137,9 @@ ResultEnum World::parseCommand(vector<string> input)
 			}
 			else if (Commands::TAKE.equals(input[0]) || Commands::PICK.equals(input[0])) {
 				player->take(input);
+			}
+			else if (Commands::DROP.equals(input[0])) {
+				player->drop(input);
 			}
 			break;
 		case 3:

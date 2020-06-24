@@ -9,7 +9,7 @@ Character::Character(string name, string description, Room* parent) : Entity(nam
 	entityType = CHARACTER;
 }
 
-Room * Character::GetRoom() const
+Room * Character::getRoom() const
 {
 	return (Room*)parent;
 }

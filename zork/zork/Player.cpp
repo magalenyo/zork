@@ -31,7 +31,7 @@ void Player::addItem(Item * item)
 
 void Player::go(const vector<string>& input)
 {
-	Exit* targetExit= GetRoom()->getTargetExit(input[1]);
+	Exit* targetExit= getRoom()->getTargetExit(input[1]);
 	if (targetExit == NULL) {
 		cout << "An exit to '" << input[1] << "' can't be found." << endl;
 	}
@@ -138,7 +138,7 @@ void Player::inventory() const
 
 void Player::unlock(const vector<string>& input)
 {
-	Exit* targetExit = GetRoom()->getTargetExit(input[1]);
+	Exit* targetExit = getRoom()->getTargetExit(input[1]);
 	if (targetExit == NULL) {
 		cout << "There was nothing in " << input[1] << "." << endl;
 		return;
@@ -160,4 +160,29 @@ void Player::unlock(const vector<string>& input)
 	cout << "You have unlocked " << targetExit->getNameFrom((Room*)parent) << " with " << input[3] << endl;
 
 	
+}
+
+void Player::drop(const vector<string>& input)
+{
+	if (input.size() == 2) {
+		Room* currentRoom = getRoom();
+		
+		Item* item = (Item*)find(input[1], ITEM);
+
+		Item* backpack = NULL;
+		if (item == NULL) {
+			backpack = getBackpack();						// get backpack
+			if (backpack != NULL) {
+				item = (Item*)backpack->find(input[1], ITEM);	// checks if the item exists in the player backpack
+			}
+		}
+
+		if (item == NULL) {
+			cout << input[1] << " could not be found in the inventory" << (backpack != NULL ? " / backpack." : ".") << endl;
+			return;
+		}
+
+		cout << "You just dropped " << input[1] << " on " << currentRoom->name << endl;
+		item->changeParentTo(parent);
+	}
 }

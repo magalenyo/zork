@@ -6,9 +6,9 @@ Entity::Entity()
 
 Entity::Entity(string name, string description, Entity* parent) : name(name), description(description), parent(parent)
 {
-	this->name = name;
+	/*this->name = name;
 	this->description = description;
-	this->parent = parent;
+	this->parent = parent;*/
 
 	if (parent != NULL)
 		parent->elements.push_back(this);

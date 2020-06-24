@@ -15,7 +15,7 @@ public:
 	Character();
 	Character(string name, string description, Room *parent);
 
-	Room* GetRoom() const;
+	Room* getRoom() const;
 
 	//void go(const vector<string> &input);
 	
