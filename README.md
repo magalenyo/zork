@@ -2,6 +2,8 @@
 
 This game is a test to access the master in Advanced Progamming for AAA Video Games. Try to test everything possible and most importantly, have fun!
 
+**IMPORTANT: When executing the .exe, open first a CMD and launch the program from the command line. The program ends when the player gets to the end or when it quits the program, but you won't see the full output if you execute the program by double clicking it.**
+
 ## Plot
 You are an explorer that has been assigned an important task. You need to deliver a precious Golden Idol to the temple it belongs to. It seems like an easy task, but it won't be that way...
 
