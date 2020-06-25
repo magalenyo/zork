@@ -44,11 +44,11 @@ The player can store only 2 items in the inventory, but can have the backpack in
 |Throw Rock | Throws a rock to make the wolves go away |
 |Eat item | Tries to eat the item |
 
-| 4 Words commands| Action |
-| --- | --- |
-|Take Item From Place | Tries to take the item from a given place |
-|Unlock Exit With Item | Tries to unlock the exit with the given item |
-|Put Item1 into Item2 | Tries to put Item1 into Item2 |
+| 4 Words commands| Action | Example |
+| --- | --- | --- |
+|Take Item From Place | Tries to take the item from a given place | take idol from backpack (idol put previosuly in the backpack and backpack is in the floor) |
+|Unlock Exit With Item | Tries to unlock the exit with the given item | unlock west with key |
+|Put Item1 into Item2 | Tries to put Item1 into Item2 | put key into backpack |
 
 ## Endings
 The user has different endings depending the gameplay style.
