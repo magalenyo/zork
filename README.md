@@ -386,6 +386,9 @@ chances
 
 cross
 
-*Author: Miguel Ángel Bueno Rivera*
+## Author 
+Miguel Ángel Bueno Rivera*
 
-*mail: magalenyo7@gmail.com*
+*contact: magalenyo7@gmail.com*
+
+Project License: [MIT](https://github.com/magalenyo/zork/blob/master/LICENSE)
