@@ -387,7 +387,7 @@ chances
 cross
 
 ## Author 
-Miguel Ángel Bueno Rivera*
+Miguel Ángel Bueno Rivera
 
 *contact: magalenyo7@gmail.com*
 
