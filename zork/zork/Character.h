@@ -1,3 +1,11 @@
+/**
+* Character.h
+*
+*
+* Author: Miguel Ángel Bueno Rivera
+*
+*/
+
 #ifndef Character_h
 #define Character_h
 
@@ -9,16 +17,12 @@ using namespace std;
 class Character : public Entity
 {
 public:
-	//Room* room;
-
-public:
 	Character();
 	Character(string name, string description, Room *parent);
 
+	// pre: --
+	// post: returns the parent Room
 	Room* getRoom() const;
-
-	//void go(const vector<string> &input);
-	
 };
 
 #endif

@@ -7,8 +7,6 @@ string StringUtils::toLowerCase(const string &param)
 	return newString;
 }
 
-// pre: param is a string separated by spaces
-// post: returns a vector of string; this vector is the param tokenized
 vector<string> StringUtils::tokenize(const string & param) {
 	vector<string> result;
 

@@ -65,7 +65,6 @@ World::World()
 	Item* rock = new Item("Rock", "Just a regular rock. This can make some noise and distract.", westPath, THROWABLE);
 	Item* backpack = new Item("Backpack", "With it, you can carry more objects.", treehouse, UTIL);
 	Item* coins = new Item("Coins", "Shiny golden coins.", bridge, UTIL);
-	// add sign?
 
 	entities.push_back(goldenIdol);
 	entities.push_back(key);
@@ -79,10 +78,6 @@ World::World()
 	Character* wolf1 = new Character("A big wolf", "This wolf has razor sharp teeth.", wolves);
 	Character* wolf2 = new Character("A smaller wolf", "Not so threatening, but still dangerous.", wolves);
 	
-	//player->addItem(goldenIdol);
-	/*goldenIdol->elements.push_back(key);
-	key->elements.push_back(sword);
-	player->addItem(rock);*/
 	
 	entities.push_back(wolf1);
 	entities.push_back(wolf2);

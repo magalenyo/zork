@@ -1,8 +1,6 @@
 /**
-* world.h
+* World.h
 *
-*
-* Created: 20/06/2020
 *
 * Author: Miguel Ángel Bueno Rivera
 *
@@ -41,8 +39,13 @@ private:
 //FUNCTIONS
 public:
 	World();
+
+	// pre: input is a vector of lowercase strings
+	// post: processes the command passed as input and returns a result depending on how it performed
 	ResultEnum parseCommand(vector<string> input);
 
+	// pre: --
+	// post: shows the ending
 	void finishGame();
 protected:
 private:

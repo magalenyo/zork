@@ -107,19 +107,12 @@ void Player::take(const vector<string> &input)
 
 void Player::look() const
 {
-	/*if (input.size() > 1) {
-		for (Entity* entity : parent->elements) {
-			if(entity->name == args[1])
+	parent->look();
+	for (Entity* entity : parent->elements) {
+		if (entity->entityType == ITEM) {
+			((Item*) entity)->look();
 		}
 	}
-	else {*/
-		parent->look();
-		for (Entity* entity : parent->elements) {
-			if (entity->entityType == ITEM) {
-				((Item*) entity)->look();
-			}
-		}
-	//}
 }
 
 void Player::inventory() const

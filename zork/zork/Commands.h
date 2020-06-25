@@ -2,28 +2,18 @@
 * Commands.h
 *
 *
-* Created: 21/06/2020
-* 
 * Author: Miguel Ángel Bueno Rivera
-* 
+*
 */
 
-#ifndef Commands_H
-#define Commands_H
+#ifndef Commands_h
+#define Commands_h
 
 #include <string>
 
 using namespace std;
 
-/*struct CommandExtended {
-	string default;
-	string shortcut;
-
-	// pre: --
-	// post: returns true if input is equals to default or shortcut
-	bool equals(string input);
-};*/
-
+// Default command, has only one value: default
 class Command {
 public:
 	string default;
@@ -31,9 +21,13 @@ public:
 public:
 	Command();
 	Command(string value);
+
+	// pre: --
+	// post: returns true if input equals default
 	virtual bool equals(string input) const;
 };
 
+// Extended Command, has an extra value: shortcut
 class CommandExtended : public Command {
 public:
 	string shortcut;
@@ -41,11 +35,13 @@ public:
 public:
 	CommandExtended();
 	CommandExtended(string value1, string value2);
+
+	//pre: --
+	//post: returns true if input equals default or input equals shortcut
 	bool equals(string input) const override;
 };
 
-
-
+// Static class with the commands
 class Commands
 {
 public:
