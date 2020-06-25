@@ -38,7 +38,7 @@ The player can store only 2 items in the inventory, but can have the backpack in
 
 | 2 Words commands| Action |
 | --- | --- |
-|Go Direction (north / n, south /s, east / e, west / w, up / u, down / d) | Moves in a direction|
+|Go Direction (north, south, east, west, up, down) | Moves in a direction|
 |Take Item | Takes the item from the floor |
 |Drop Item | Drops the item if the user has it in its inventory or backpack |
 |Throw Rock | Throws a rock to make the wolves go away |
